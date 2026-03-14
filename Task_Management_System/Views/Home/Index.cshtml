@@ -1,0 +1,44 @@
+@{
+    ViewData["Title"] = "TaskFlow";
+}
+
+<div class="row align-items-center g-4">
+    <div class="col-12 col-lg-6">
+        <h1 class="display-5 text-white mb-3">A calmer way to manage your tasks.</h1>
+        <p class="lead text-muted mb-4">
+            TaskFlow helps you capture, organize, and ship your work with a clean, fast interface
+            designed for modern teams and focused individuals.
+        </p>
+        <div class="d-flex flex-wrap gap-2 mb-3">
+            <a asp-controller="Task" asp-action="Index" class="btn btn-primary">
+                Go to dashboard
+            </a>
+            <a asp-controller="Account" asp-action="Register" class="btn btn-outline-secondary">
+                Create free account
+            </a>
+        </div>
+        <p class="text-muted small mb-0">No ads. No clutter. Just your tasks.</p>
+    </div>
+    <div class="col-12 col-lg-6">
+        <div class="task-card p-3">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <span class="text-muted small">Today</span>
+                <span class="badge badge-status-pending">3 due</span>
+            </div>
+            <div class="mb-2">
+                <div class="task-card-meta mb-1">Design landing page</div>
+                <div class="progress" style="height:4px;">
+                    <div class="progress-bar bg-primary" style="width: 60%;"></div>
+                </div>
+            </div>
+            <div class="mb-2">
+                <div class="task-card-meta mb-1">Review pull requests</div>
+                <span class="badge badge-status-completed">Completed</span>
+            </div>
+            <div>
+                <div class="task-card-meta mb-1">Prepare sprint planning</div>
+                <span class="badge badge-status-overdue">Overdue</span>
+            </div>
+        </div>
+    </div>
+</div>

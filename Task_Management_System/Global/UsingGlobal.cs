@@ -1,0 +1,12 @@
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.AspNetCore.Identity;
+global using System.ComponentModel.DataAnnotations.Schema;
+global using Task_Management_System.Models;
+global using Task_Management_System.Data.DatabaseContext;
+global using Task_Management_System.Repostries.Implemation;
+global using Task_Management_System.ViewModel;
+global using Microsoft.AspNetCore.Mvc;
+global using System.ComponentModel.DataAnnotations;
+global using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+global using System.Security.Claims;
+global using Microsoft.AspNetCore.Authorization;

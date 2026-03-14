@@ -1,0 +1,65 @@
+@model LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="auth-wrapper">
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-12 col-lg-8">
+                <div class="row g-4 align-items-center">
+                    <div class="col-md-6 d-none d-md-block">
+                        <h1 class="h3 auth-title mb-2">Welcome back to TaskFlow</h1>
+                        <p class="auth-subtitle">
+                            Log in to review your tasks, plan your day, and keep everything moving.
+                        </p>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="auth-card">
+                            <div class="auth-card-header">
+                                <h2 class="h5 auth-title mb-1">Sign in</h2>
+                                <p class="auth-subtitle mb-3">Enter your credentials to access your workspace.</p>
+                            </div>
+                            <div class="auth-card-body">
+                                <form asp-action="Login" method="post" novalidate>
+                                    <div asp-validation-summary="All" class="text-danger mb-2"></div>
+
+                                    <div class="mb-3">
+                                        <label asp-for="Email" class="form-label small text-muted">Email</label>
+                                        <input asp-for="Email" class="form-control" placeholder="you@example.com" />
+                                        <span asp-validation-for="Email" class="text-danger small"></span>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label asp-for="Password" class="form-label small text-muted">Password</label>
+                                        <input asp-for="Password" class="form-control" />
+                                        <span asp-validation-for="Password" class="text-danger small"></span>
+                                    </div>
+
+                                    <div class="d-grid mb-2">
+                                        <button type="submit" class="btn btn-primary">
+                                            Continue
+                                        </button>
+                                    </div>
+
+                                    <div class="text-center mt-2">
+                                        <small class="text-muted">
+                                            Don't have an account?
+                                            <a asp-action="Register" class="text-decoration-none">Sign up</a>
+                                        </small>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
