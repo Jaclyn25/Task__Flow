@@ -5,69 +5,131 @@
 }
 
 <div class="container mt-5">
-
     <div class="row justify-content-center">
-
-        <div class="col-md-6">
-
-            <div class="card shadow-lg border-0">
-
-                <div class="card-header bg-primary text-white text-center">
-                    <h3 class="mb-0">Create New Task</h3>
+        <div class="col-lg-6">
+            <div class="card shadow-lg border-0" style="border-radius: 1rem;">
+                <div class="card-header" style="background: linear-gradient(135deg, #6366f1 0%, #14b8a6 100%); color: white; border-radius: 1rem 1rem 0 0; padding: 2rem;">
+                    <h3 class="mb-0">✨ Create New Task</h3>
                 </div>
+                <div class="card-body p-4">
+                    <form asp-action="SaveNew" method="post" enctype="multipart/form-data">
 
-                <div class="card-body">
+                        <div asp-validation-summary="All" class="text-danger mb-3 small"></div>
 
-                    <form asp-action="SaveNew" method="post">
-
-                        <div asp-validation-summary="All" class="text-danger mb-3"></div>
-
-                        <div class="mb-3">
+                        <div class="mb-4">
                             <label asp-for="Name" class="form-label fw-bold"></label>
                             <input asp-for="Name" class="form-control" placeholder="Enter task title" />
-                            <span asp-validation-for="Name" class="text-danger"></span>
+                            <span asp-validation-for="Name" class="text-danger small"></span>
                         </div>
 
-                        <div class="mb-3">
+                        <div class="mb-4">
                             <label asp-for="Description" class="form-label fw-bold"></label>
-                            <textarea asp-for="Description" class="form-control" rows="3" placeholder="Enter task description"></textarea>
-                            <span asp-validation-for="Description" class="text-danger"></span>
+                            <textarea asp-for="Description" class="form-control" rows="4" placeholder="What is this task about?"></textarea>
+                            <span asp-validation-for="Description" class="text-danger small"></span>
                         </div>
 
-                        <div class="mb-3">
-                            <label asp-for="DueDate" class="form-label fw-bold"></label>
-                            <input asp-for="DueDate" type="date" class="form-control" />
-                            <span asp-validation-for="DueDate" class="text-danger"></span>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-4">
+                                    <label asp-for="DueDate" class="form-label fw-bold"></label>
+                                    <input asp-for="DueDate" type="date" class="form-control" />
+                                    <span asp-validation-for="DueDate" class="text-danger small"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-4">
+                                    <label class="form-label">&nbsp;</label>
+                                    <div class="form-check mt-2">
+                                        <input asp-for="IsCompleted" class="form-check-input" />
+                                        <label asp-for="IsCompleted" class="form-check-label">Mark as Completed</label>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="form-check mb-3">
-                            <input asp-for="IsCompleted" class="form-check-input" />
-                            <label asp-for="IsCompleted" class="form-check-label"></label>
+                        <div class="mb-4">
+                            <label asp-for="TaskImages" class="form-label fw-bold"><i class="bi bi-image"></i> Upload Images</label>
+                            <div class="border-2 border-dashed rounded p-4" style="border-color: #e5e7eb; background: #f9fafb; cursor: pointer; text-align: center;" id="dropZone">
+                                <input asp-for="TaskImages" type="file" class="form-control d-none" id="fileInput" multiple accept="image/*" 
+                                       onchange="handleImagePreview(event, 'imagesPreview')" />
+                                <div style="color: #9ca3af;">
+                                    <i class="bi bi-cloud-arrow-up" style="font-size: 2rem;"></i>
+                                    <p class="mb-0 small mt-2">Click or drag images here</p>
+                                    <small style="color: #d1d5db;">Supported formats: JPG, PNG, GIF</small>
+                                </div>
+                            </div>
+                            <span asp-validation-for="TaskImages" class="text-danger small"></span>
                         </div>
+
+                        <div id="imagesPreview" class="mb-4" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 0.75rem;"></div>
 
                         <div class="d-grid gap-2">
-
-                            <button type="submit" class="btn btn-success btn-lg">
-                                Save Task
+                            <button type="submit" class="btn btn-primary btn-lg" style="background: linear-gradient(135deg, #6366f1 0%, #818cf8 100%);font-weight: 600;">
+                                <i class="bi bi-check-circle"></i> Create Task
                             </button>
-
-                            <a asp-action="Index" class="btn btn-outline-secondary">
+                            <a asp-action="Index" class="btn btn-outline-secondary" style="font-weight: 600;">
                                 Cancel
                             </a>
-
                         </div>
-
                     </form>
-
                 </div>
-
             </div>
-
         </div>
-
     </div>
-
 </div>
+
+<script>
+    // ===== Image Preview on Upload =====
+    function handleImagePreview(event, containerId) {
+        const files = event.target.files;
+        const container = document.getElementById(containerId);
+        container.innerHTML = '';
+
+        if (files.length > 0) {
+            Array.from(files).forEach((file) => {
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        const img = document.createElement('img');
+                        img.src = e.target.result;
+                        img.style.cssText = 'height: 80px; width: 80px; object-fit: cover; border-radius: 0.5rem; cursor: pointer; box-shadow: 0 1px 3px rgba(0,0,0,0.1); transition: transform 0.2s;';
+                        img.title = file.name;
+                        img.onmouseover = () => img.style.transform = 'scale(1.05)';
+                        img.onmouseout = () => img.style.transform = 'scale(1)';
+                        img.onclick = () => window.open(e.target.result, '_blank');
+                        container.appendChild(img);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+    }
+
+    // ===== Drag and Drop =====
+    const dropZone = document.getElementById('dropZone');
+    dropZone.addEventListener('click', () => {
+        document.getElementById('fileInput').click();
+    });
+
+    dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropZone.style.backgroundColor = '#f0f9ff';
+        dropZone.style.borderColor = '#6366f1';
+    });
+
+    dropZone.addEventListener('dragleave', () => {
+        dropZone.style.backgroundColor = '#f9fafb';
+        dropZone.style.borderColor = '#e5e7eb';
+    });
+
+    dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        document.getElementById('fileInput').files = e.dataTransfer.files;
+        handleImagePreview({ target: { files: e.dataTransfer.files } }, 'imagesPreview');
+        dropZone.style.backgroundColor = '#f9fafb';
+        dropZone.style.borderColor = '#e5e7eb';
+    });
+</script>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
