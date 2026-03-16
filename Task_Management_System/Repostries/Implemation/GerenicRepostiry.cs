@@ -11,7 +11,12 @@
             _dbSet = _taskDbContext.Set<T>();
         }
 
-        public List<T> GetAll()
+        public IQueryable<T> GetAll()
+        {
+            return _dbSet;
+        }
+
+        public List<T> GetAllList()
         {
             return _dbSet.ToList();
         }

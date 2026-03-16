@@ -1,6 +1,9 @@
-﻿public interface IRepostriy<T>
+﻿using System.Linq;
+
+public interface IRepostriy<T>
 {
-    List<T> GetAll();
+    IQueryable<T> GetAll();
+    List<T> GetAllList();
     T GetByID(string id);
     void Add(T entity);
     void Update(T entity);
