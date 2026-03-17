@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Background Gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4f46e5;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e0e7ff;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background Circle -->
+  <circle cx="100" cy="100" r="100" fill="url(#bgGradient)"/>
+  
+  <!-- Task List Background -->
+  <rect x="40" y="45" width="120" height="110" rx="8" fill="url(#accentGradient)" opacity="0.95"/>
+  
+  <!-- Checkbox Items -->
+  <!-- Item 1 -->
+  <rect x="50" y="55" width="16" height="16" rx="3" fill="none" stroke="#6366f1" stroke-width="2"/>
+  <path d="M56 62 L60 66 L68 58" stroke="#10b981" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <rect x="72" y="57" width="50" height="3" rx="1.5" fill="#d1d5db"/>
+  
+  <!-- Item 2 -->
+  <rect x="50" y="80" width="16" height="16" rx="3" fill="none" stroke="#6366f1" stroke-width="2"/>
+  <path d="M56 87 L60 91 L68 83" stroke="#10b981" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <rect x="72" y="82" width="60" height="3" rx="1.5" fill="#d1d5db"/>
+  
+  <!-- Item 3 (unchecked) -->
+  <rect x="50" y="105" width="16" height="16" rx="3" fill="none" stroke="#9ca3af" stroke-width="2"/>
+  <rect x="72" y="107" width="45" height="3" rx="1.5" fill="#f3f4f6"/>
+  
+  <!-- Accent Bar on left -->
+  <rect x="20" y="45" width="8" height="110" rx="4" fill="#10b981" opacity="0.8"/>
+</svg>

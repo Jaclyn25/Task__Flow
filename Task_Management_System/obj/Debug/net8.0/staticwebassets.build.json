@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "vw/pyWF50LPlv6mZTCQaZ58KpqYnLtqJO3z31bkLFdE=",
+  "Hash": "upaGH5RVlZED0J8usApZixfdyZ6wkZEwU5eA74pMORY=",
   "Source": "Task_Management_System",
   "BasePath": "_content/Task_Management_System",
   "Mode": "Default",
@@ -91,6 +91,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\Lenovo\\GitProjects\\Task_Management_System\\Task_Management_System\\wwwroot\\favicon.svg",
+      "SourceId": "Task_Management_System",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Lenovo\\GitProjects\\Task_Management_System\\Task_Management_System\\wwwroot\\",
+      "BasePath": "_content/Task_Management_System",
+      "RelativePath": "favicon.svg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\favicon.svg"
     },
     {
       "Identity": "C:\\Users\\Lenovo\\GitProjects\\Task_Management_System\\Task_Management_System\\wwwroot\\js\\site.js",
