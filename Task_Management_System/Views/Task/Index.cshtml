@@ -201,8 +201,7 @@ else
                                 <div class="mb-4">
                                     <label class="form-label">&nbsp;</label>
                                     <div class="form-check mt-2">
-                                        <input type="hidden" name="IsCompleted" value="false" />
-                                        <input class="form-check-input" type="checkbox" name="IsCompleted" value="true" id="addIsCompleted" />
+                                        <input class="form-check-input" type="checkbox" name="IsCompleted" id="addIsCompleted" />
                                         <label class="form-check-label" for="addIsCompleted">Mark as Completed</label>
                                     </div>
                                 </div>
@@ -286,8 +285,7 @@ else
                                 <div class="mb-4">
                                     <label class="form-label">&nbsp;</label>
                                     <div class="form-check mt-2">
-                                        <input type="hidden" name="IsCompleted" value="false" />
-                                        <input type="checkbox" class="form-check-input" id="editIsCompleted" name="IsCompleted" value="true" />
+                                        <input type="checkbox" class="form-check-input" id="editIsCompleted" name="IsCompleted" />
                                         <label class="form-check-label" for="editIsCompleted">Mark as Completed</label>
                                     </div>
                                 </div>
@@ -524,10 +522,9 @@ else
             event.preventDefault();
             const form = document.getElementById('addTaskForm');
             const formData = new FormData(form);
-            const submitBtn = document.getElementById('addTaskSubmitBtn');
             
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Creating...';
+            // Ensure IsCompleted is always sent (checked=true, unchecked=false)
+            formData.set('IsCompleted', document.getElementById('addIsCompleted').checked ? 'true' : 'false');
 
             fetch('/Task/SaveNew', {
                 method: 'POST',
@@ -547,19 +544,15 @@ else
                     // Show success message
                     showNotification('Task created successfully!', 'success');
                     
-                    // Reload page after 1 second for smooth transition
-                    setTimeout(() => location.reload(), 800);
+                    // Reload page to show new task
+                    location.reload();
                 } else {
                     showNotification(data.message || 'Error creating task', 'error');
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = 'Create Task';
                 }
             })
             .catch(err => {
                 console.error('Error:', err);
                 showNotification('Error creating task', 'error');
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = 'Create Task';
             });
         }
 
@@ -568,10 +561,9 @@ else
             event.preventDefault();
             const form = document.getElementById('editTaskForm');
             const formData = new FormData(form);
-            const submitBtn = document.getElementById('editTaskSubmitBtn');
             
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Saving...';
+            // Ensure IsCompleted is always sent (checked=true, unchecked=false)
+            formData.set('IsCompleted', document.getElementById('editIsCompleted').checked ? 'true' : 'false');
 
             fetch('/Task/Edit', {
                 method: 'POST',
@@ -584,22 +576,18 @@ else
                     const modal = bootstrap.Modal.getInstance(document.getElementById('editModal'));
                     modal.hide();
                     
-                    // Show success message
+                    // Show success message and reload
                     showNotification('Task updated successfully!', 'success');
                     
-                    // Reload page after 1 second for smooth transition
-                    setTimeout(() => location.reload(), 800);
+                    // Reload page to show updated task
+                    location.reload();
                 } else {
                     showNotification(data.message || 'Error updating task', 'error');
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = 'Save Changes';
                 }
             })
             .catch(err => {
                 console.error('Error:', err);
                 showNotification('Error updating task', 'error');
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = 'Save Changes';
             });
         }
 
@@ -608,8 +596,6 @@ else
             if (!confirm('Delete this task permanently?')) return;
             
             const button = event.target.closest('button');
-            button.disabled = true;
-            button.innerHTML = '<span class="spinner-border spinner-border-sm"></span>';
 
             fetch('/Task/Delete', {
                 method: 'POST',
@@ -622,19 +608,15 @@ else
             .then(data => {
                 if (data.success) {
                     showNotification('Task deleted successfully!', 'success');
-                    // Reload page after 600ms for smooth transition
-                    setTimeout(() => location.reload(), 600);
+                    // Reload page to remove deleted task
+                    location.reload();
                 } else {
                     showNotification(data.message || 'Error deleting task', 'error');
-                    button.disabled = false;
-                    button.innerHTML = '<i class="bi bi-trash"></i>Delete';
                 }
             })
             .catch(err => {
                 console.error('Error:', err);
                 showNotification('Error deleting task', 'error');
-                button.disabled = false;
-                button.innerHTML = '<i class="bi bi-trash"></i>Delete';
             });
         }
 
